@@ -2,8 +2,6 @@ FROM ubuntu:18.04
  
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password password helloworld'
-RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password helloworld'
 
 RUN apt-get install -y mysql-server
 
