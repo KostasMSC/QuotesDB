@@ -35,7 +35,15 @@ pipeline {
 		}
 		stage('Deploy docker image from Dockerhub To Production Server') {
 		  steps{
-		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker stop \$(sudo docker ps -a -q) || true && sudo docker rm \$(sudo docker ps -a -q) || true\'"
+			script {
+			        try {
+            		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker stop \$(sudo docker ps -a -q) || true && sudo docker rm \$(sudo docker ps -a -q) || true\'"
+			        }
+			        catch (exc) {
+			            echo "Error while removing images, continue..., cause: " + exc;
+			        }
+			    }
+
 		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker run -d -p 3306:3306 $mysqlImage\'"
 		  }
 		}
