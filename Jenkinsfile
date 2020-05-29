@@ -12,11 +12,6 @@ pipeline {
                 echo "Checking out from git repository.";
             }
         }
-        stage('Remove Containers, Images etc') {
-            steps {
-                sh 'docker system prune -a -f';
-            }
-        }
 		stage('Building Tomcat image') {
 		  steps{
 		    script {
