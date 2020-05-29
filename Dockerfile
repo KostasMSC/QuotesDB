@@ -1,9 +1,19 @@
 FROM ubuntu:18.04
  
-RUN apt-get -y update
-RUN apt-get -y upgrade
-
-RUN apt-get install -y mysql-server
+RUN apt-get update \
+    && apt-get install -y apt-utils \                                           
+    && { \
+        echo debconf debconf/frontend select Noninteractive; \
+        echo mysql-community-server mysql-community-server/data-dir \
+            select ''; \
+        echo mysql-community-server mysql-community-server/root-pass \
+            password 'helloworld'; \
+        echo mysql-community-server mysql-community-server/re-root-pass \
+            password 'helloworld'; \
+        echo mysql-community-server mysql-community-server/remove-test-db \
+            select true; \
+    } | debconf-set-selections \
+    && apt-get install -y mysql-server
 
 # solves some bind_address issues
 COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
