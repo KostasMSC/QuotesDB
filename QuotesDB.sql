@@ -1,4 +1,5 @@
-DROP DATABaSE IF EXISTS QUOTES_DB;
+DROP DATABASE IF EXISTS QUOTES_DB;
+
 CREATE DATABASE QUOTES_DB;
 
 USE QUOTES_DB;
@@ -29,4 +30,8 @@ INSERT INTO QUOTES_TABLE (QUOTE, AUTHOR) VALUES
   ('Happiness is when what you think, what you say, and what you do are in harmony.', 'Mahatma Ghandi');
 INSERT INTO QUOTES_TABLE (QUOTE, AUTHOR) VALUES
   ('Don''t follow the crowd, let the crowd follow you.', 'Margaret Thatcher');
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'helloworld';
+GRANT ALL PRIVILEGES ON QUOTES_DB.* TO 'root'@'%';
+FLUSH PRIVILEGES;
   
