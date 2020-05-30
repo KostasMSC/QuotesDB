@@ -37,7 +37,11 @@ pipeline {
 		  steps{
 			script {
 			        try {
+<<<<<<< HEAD
             		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker stop \$(sudo docker ps -a -q) || true && sudo docker rm \$(sudo docker ps -a -q) || true\'"
+=======
+			            		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker stop \$(sudo docker ps -a -q) || true && sudo docker rm \$(sudo docker ps -a -q) || true\'"
+>>>>>>> branch 'master' of https://github.com/KostasMSC/QuotesDB.git
 			        }
 			        catch (exc) {
 			            echo "Error while removing images, continue..., cause: " + exc;
