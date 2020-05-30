@@ -37,7 +37,7 @@ pipeline {
 		  steps{
 			script {
 			        try {
-            		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker stop \$(sudo docker ps -a -q) || true && sudo docker rm \$(sudo docker ps -a -q) || true\'"
+            		    sh "sudo ssh -o StrictHostKeyChecking=no -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker stop \$(sudo docker ps -a -q) || true && sudo docker rm \$(sudo docker ps -a -q) || true\'"
 
 			        }
 			        catch (exc) {
@@ -45,7 +45,7 @@ pipeline {
 			        }
 			    }
 
-		    sh "sudo ssh -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker run -d -p 3306:3306 $mysqlImage\'"
+		    sh "sudo ssh -o StrictHostKeyChecking=no -oIdentityFile=/home/ubuntu/.ssh/FinalJenkins2.pem ubuntu@$DBServer \'sudo docker run -d -p 3306:3306 $mysqlImage\'"
 		  }
 		}
     }
