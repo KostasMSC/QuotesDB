@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-		DBServer = 'ec2-18-194-89-180.eu-central-1.compute.amazonaws.com'
+		DBServer = 'ec2-18-195-190-120.eu-central-1.compute.amazonaws.com'
 		mysqlImage = "kargyris/mysql"
 		registryCredential = 'dockerhub'
 		dockerMysqlImage = ''
